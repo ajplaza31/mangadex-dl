@@ -93,7 +93,7 @@ def uniquify(title, chapnum, groupname, basedir):
 		counter += 1
 	return dest_folder
 
-def dl(manga_id, lang_code, zip_up, ds, outdir):
+def dl(manga_id, lang_code, zip_up, ds, outdir, pdf):
 	uuid = manga_id
 
 	if manga_id.isnumeric():
@@ -302,6 +302,8 @@ if __name__ == "__main__":
 	parser.add_argument("-o", dest="outdir", required=False,
 			action="store", default="download",
 			help="specify name of output directory")
+	parser.add_argument("-p", dest="pdf", required=False,
+			help="package chapters into discrete pdfs")
 	args = parser.parse_args()
 
 	lang_code = "en" if args.lang is None else str(args.lang)
@@ -318,4 +320,4 @@ if __name__ == "__main__":
 		print("Error with URL.")
 		exit(1)
 
-	dl(manga_id, lang_code, args.cbz, args.datasaver, args.outdir)
+	dl(manga_id, lang_code, args.cbz, args.datasaver, args.outdir, args.pdf)
